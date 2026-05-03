@@ -10,31 +10,29 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body { 
-            background-color: #050505; 
-            color: #e0e0e0;
+            /* Set background to Sky Blue */
+            background-color: #87CEEB; 
+            color: #1a1a1a;
             font-family: 'Cinzel', serif, system-ui;
             height: 100vh;
             display: flex;
             flex-direction: column;
-            overflow: hidden; /* Keeps the terminal look clean */
-            background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), 
-                        url('https://images.alphacoders.com/135/1359670.jpeg');
-            background-size: cover;
-            background-position: center;
+            overflow: hidden;
         }
 
         .header-bar {
             padding: 20px;
             text-align: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.2); /* Light glass effect */
+            backdrop-filter: blur(5px);
         }
 
         h2 {
             text-transform: uppercase;
             letter-spacing: 6px;
             font-size: 1.2rem;
-            color: #fff;
+            color: #000; /* Darker text for visibility on blue */
         }
 
         .iframe-container {
@@ -53,21 +51,28 @@
         }
 
         .footer-nav {
-            padding: 15px;
+            padding: 20px;
             text-align: center;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.1);
         }
 
-        .back-link {
-            color: #444;
+        .return-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border: 1px solid #000;
+            color: #000;
             text-decoration: none;
-            font-size: 0.7rem;
-            letter-spacing: 2px;
-            transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            transition: 0.4s;
+            background: rgba(0,0,0,0.05);
         }
 
-        .back-link:hover {
+        .return-btn:hover {
+            background: #000;
             color: #fff;
         }
     </style>
@@ -79,7 +84,7 @@
     </div>
 
     <div class="iframe-container">
-        <!-- Tally Iframe -->
+        <!-- Tally Iframe with transparency enabled -->
         <iframe 
             data-tally-src="https://tally.so/r/rj2VML?transparentBackground=1" 
             width="100%" 
@@ -92,7 +97,7 @@
     </div>
 
     <div class="footer-nav">
-        <a href="index.html" class="back-link">TERMINATE SESSION & RETURN</a>
+        <a href="index.html" class="return-btn">Return to Command Center</a>
     </div>
 
 </body>

@@ -1,14 +1,163 @@
-<!-- Replace 'YOUR_ENDPOINT' with the link provided by your chosen form handler -->
-<form action="https://formspree.io/f/YOUR_ID" method="POST">
-  <label>
-    Your Name:
-    <input type="text" name="name" required>
-  </label>
-  <br>
-  <label>
-    What do you want to submit?
-    <textarea name="message" required></textarea>
-  </label>
-  <br>
-  <button type="submit">Send to Gabriel</button>
-</form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Submission Terminal</title>
+    <style>
+        /* Global Reset */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background-color: #050505;
+            color: #e0e0e0;
+            font-family: 'Cinzel', serif, system-ui;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            /* Using the same background as index.html for consistency */
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.8)), 
+                        url('https://images.alphacoders.com/135/1359670.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .form-container {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 50px 40px;
+            width: 90%;
+            max-width: 600px;
+            border-radius: 4px;
+            box-shadow: 0 0 50px rgba(0,0,0,0.8);
+            position: relative;
+        }
+
+        /* Decorative Corner Accents */
+        .form-container::before {
+            content: "";
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 20px;
+            height: 20px;
+            border-top: 2px solid #fff;
+            border-left: 2px solid #fff;
+        }
+
+        h2 {
+            text-transform: uppercase;
+            letter-spacing: 6px;
+            margin-bottom: 40px;
+            text-align: center;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            color: #888;
+            text-transform: uppercase;
+        }
+
+        input[type="text"], 
+        textarea {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 25px;
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #fff;
+            font-family: 'Segoe UI', sans-serif;
+            transition: 0.3s;
+        }
+
+        /* Styled File Upload Area */
+        input[type="file"] {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 25px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px dashed rgba(255, 255, 255, 0.3);
+            color: #ccc;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+
+        input:focus, textarea:focus, input[type="file"]:hover {
+            outline: none;
+            border-color: #fff;
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 15px rgba(255,255,255,0.1);
+        }
+
+        .btn-send {
+            width: 100%;
+            padding: 18px;
+            background: none;
+            border: 1px solid #fff;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.4s;
+            margin-top: 10px;
+        }
+
+        .btn-send:hover {
+            background: #fff;
+            color: #000;
+            box-shadow: 0 0 25px rgba(255,255,255,0.4);
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 30px;
+            color: #555;
+            text-decoration: none;
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            transition: 0.3s;
+        }
+        
+        .back-link:hover { color: #fff; }
+
+        ::placeholder { color: #444; }
+    </style>
+    <!-- Cinematic Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="form-container">
+        <h2>Submit Terminal</h2>
+        
+        <!-- Replace YOUR_ID with your actual Formspree ID -->
+        <form action="https://formspree.io/f/YOUR_ID" method="POST" enctype="multipart/form-data">
+            
+            <label for="name">Operator ID</label>
+            <input type="text" id="name" name="name" placeholder="IDENTIFY YOURSELF..." required>
+
+            <label for="file">Data Attachment (Image/Doc)</label>
+            <input type="file" id="file" name="attachment">
+
+            <label for="message">Transmission Notes</label>
+            <textarea id="message" name="message" rows="4" placeholder="ENTER LOG DATA..." required></textarea>
+
+            <button type="submit" class="btn-send">Execute Upload</button>
+            
+        </form>
+
+        <a href="index.html" class="back-link">< TERMINATE SESSION & RETURN</a>
+    </div>
+
+</body>
+</html>

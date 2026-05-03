@@ -8,10 +8,11 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body {
             background-color: #050505;
             color: #e0e0e0;
-            font-family: 'Cinzel', serif;
+            font-family: 'Cinzel', serif, system-ui;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -20,97 +21,145 @@
                         url('https://images.alphacoders.com/135/1359670.jpeg');
             background-size: cover;
             background-position: center;
+            background-attachment: fixed;
         }
+
         .form-container {
             background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 40px;
+            padding: 50px 40px;
             width: 90%;
             max-width: 500px;
             border-radius: 4px;
+            box-shadow: 0 0 50px rgba(0,0,0,0.8);
+            position: relative;
         }
-        h2 { text-transform: uppercase; letter-spacing: 4px; margin-bottom: 30px; text-align: center; }
-        input, textarea, button {
+
+        h2 {
+            text-transform: uppercase;
+            letter-spacing: 6px;
+            margin-bottom: 30px;
+            text-align: center;
+            color: #fff;
+        }
+
+        input, textarea {
             width: 100%;
             padding: 15px;
             margin-bottom: 20px;
             background: rgba(0, 0, 0, 0.6);
             border: 1px solid rgba(255, 255, 255, 0.15);
             color: #fff;
+            font-family: sans-serif;
         }
+
         .btn-send {
+            width: 100%;
+            padding: 18px;
             background: none;
             border: 1px solid #fff;
-            cursor: pointer;
+            color: #fff;
             text-transform: uppercase;
-            font-weight: bold;
-            transition: 0.3s;
+            letter-spacing: 4px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.4s;
         }
-        .btn-send:hover { background: #fff; color: #000; }
-        #status { font-size: 0.8rem; text-align: center; color: #888; }
+
+        .btn-send:hover {
+            background: #fff;
+            color: #000;
+        }
+
+        #status {
+            margin-top: 20px;
+            font-size: 0.8rem;
+            text-align: center;
+            letter-spacing: 2px;
+            color: #888;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 30px;
+            color: #444;
+            text-decoration: none;
+            font-size: 0.7rem;
+        }
     </style>
 </head>
 <body>
 
     <div class="form-container">
         <h2>Ingestion Terminal</h2>
+        
         <input type="text" id="operator_id" placeholder="OPERATOR ID" required>
         <input type="file" id="file_input">
-        <textarea id="notes" placeholder="TRANSMISSION NOTES"></textarea>
+        <textarea id="notes" placeholder="TRANSMISSION NOTES" rows="3"></textarea>
+
         <button id="upload_btn" class="btn-send">Execute Transmission</button>
+        
         <p id="status">STANDBY...</p>
-        <a href="index.html" style="color:#555; text-decoration:none; display:block; text-align:center; font-size:0.7rem;">RETURN</a>
+
+        <a href="index.html" class="back-link">TERMINATE SESSION & RETURN</a>
     </div>
 
     <script>
-        // Replace these with your actual Supabase credentials
-        const SUPABASE_URL = 'YOUR_SUPABASE_URL';
-        const SUPABASE_KEY = 'YOUR_SUPABASE_ANON_KEY';
-        const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+        // Your Integrated Supabase Credentials
+        const SUPABASE_URL = 'https://sfgyjnnohojlqjpmwzyi.supabase.co';
+        const SUPABASE_KEY = 'sb_publishable_CZj_VR1_W1w10ve0i8J3Ew_HkjZWoE4';
+        
+        const { createClient } = supabase;
+        const _supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
         document.getElementById('upload_btn').addEventListener('click', async () => {
-            const file = document.getElementById('file_input').files[0];
+            const fileInput = document.getElementById('file_input');
+            const file = fileInput.files[0];
             const operatorId = document.getElementById('operator_id').value;
             const notes = document.getElementById('notes').value;
             const status = document.getElementById('status');
 
             if (!file || !operatorId) {
-                status.innerText = "ERROR: INCOMPLETE DATA";
+                status.innerText = "ERROR: ID AND FILE REQUIRED";
                 return;
             }
 
-            status.innerText = "UPLOADING FILE...";
+            try {
+                status.innerText = "INITIALIZING UPLOAD...";
 
-            // 1. Upload File to Storage
-            const fileName = `${Date.now()}_${file.name}`;
-            const { data: storageData, error: storageError } = await supabase.storage
-                .from('transmissions')
-                .upload(fileName, file);
+                // 1. Upload to Storage Bucket (transmissions)
+                const fileExt = file.name.split('.').pop();
+                const fileName = `${Date.now()}.${fileExt}`;
+                
+                const { data: storageData, error: storageError } = await _supabase.storage
+                    .from('transmissions')
+                    .upload(fileName, file);
 
-            if (storageError) {
-                status.innerText = "STORAGE ERROR: " + storageError.message;
-                return;
-            }
+                if (storageError) throw storageError;
 
-            // 2. Get Public URL
-            const { data: urlData } = supabase.storage
-                .from('transmissions')
-                .getPublicUrl(fileName);
+                // 2. Get Public URL
+                const { data: urlData } = _supabase.storage
+                    .from('transmissions')
+                    .getPublicUrl(fileName);
 
-            // 3. Save Record to SQL Database
-            const { error: dbError } = await supabase
-                .from('uploads')
-                .insert([{ 
-                    operator_id: operatorId, 
-                    file_url: urlData.publicUrl, 
-                    notes: notes 
-                }]);
+                // 3. Save Record to SQL Table (uploads)
+                const { error: dbError } = await _supabase
+                    .from('uploads')
+                    .insert([{ 
+                        operator_id: operatorId, 
+                        file_url: urlData.publicUrl, 
+                        notes: notes 
+                    }]);
 
-            if (dbError) {
-                status.innerText = "DATABASE ERROR: " + dbError.message;
-            } else {
+                if (dbError) throw dbError;
+
                 status.innerText = "TRANSMISSION SUCCESSFUL";
+
+            } catch (err) {
+                console.error(err);
+                status.innerText = "SYSTEM ERROR: " + err.message;
             }
         });
     </script>

@@ -16,7 +16,6 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            /* Using the same background for consistency */
             background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.8)), 
                         url('https://images.alphacoders.com/135/1359670.jpeg');
             background-size: cover;
@@ -139,12 +138,14 @@
     <div class="form-container">
         <h2>Submit Terminal</h2>
         
+        <!-- CRITICAL: enctype="multipart/form-data" is required for files -->
         <form action="https://formbold.com/s/3KmBA" method="POST" enctype="multipart/form-data">
             
             <label for="name">Operator ID</label>
             <input type="text" id="name" name="name" placeholder="IDENTIFY YOURSELF..." required>
 
             <label for="file">Data Attachment (Image/Doc)</label>
+            <!-- CRITICAL: The 'name' attribute must be present -->
             <input type="file" id="file" name="attachment">
 
             <label for="message">Transmission Notes</label>

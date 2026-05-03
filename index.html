@@ -3,116 +3,221 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rover's Terminal</title>
+    <title>Gabriel's Inventory Section | Data Engineering</title>
+    
+    <!-- Load Cinzel Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+    
     <style>
-        /* 1. Global Styles - Dark Gaming Theme */
+        /* CSS RESET */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
-        body {
-            background-color: #050505; /* Deep black background */
+        body { 
+            background-color: #000000; 
             color: #e0e0e0;
-            font-family: 'Cinzel', serif, system-ui; /* Sharp, high-fantasy style */
+            font-family: 'Cinzel', serif, system-ui;
             overflow-x: hidden;
         }
 
-        /* 2. Hero Background Image */
-        .hero {
+        /* --- TOP BANNER (As seen in image_10.png) --- */
+        .hero-banner {
             position: relative;
-            height: 100vh;
             width: 100%;
+            height: 60vh; /* Banner takes up 60% of the screen */
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
-            /* Replace the URL below with a high-res wallpaper you like */
-            background: linear-gradient(rgba(0,0,0,0.3), #050505), 
-                        url('frieren-wallpaper-4k-made-by-me-3-v0-for3cbmfqjoc1.jpg'); 
+            text-align: center;
+            
+            /* Reference Background Image from original design */
+            background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.9)), 
+                              url('https://images.alphacoders.com/135/1359670.jpeg');
             background-size: cover;
             background-position: center;
-            text-align: center;
+            background-attachment: fixed;
         }
 
-        /* 3. Text Glow & Animations */
-        h1 {
-            font-size: 4rem;
-            letter-spacing: 5px;
+        .hero-text h1 {
+            font-size: 3rem;
             text-transform: uppercase;
-            text-shadow: 0 0 20px rgba(255,255,255,0.5);
+            letter-spacing: 12px;
             margin-bottom: 10px;
+            text-shadow: 0 0 30px rgba(255, 255, 255, 0.7);
         }
 
-        p.subtitle {
-            font-size: 1.2rem;
+        .hero-text h3 {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 6px;
+            margin-bottom: 40px;
             color: #aaa;
-            margin-bottom: 30px;
-            letter-spacing: 2px;
         }
 
-        /* 4. The Submission Button - Glowing Effect */
-        .btn-submit {
+        .btn-initialize {
+            display: inline-block;
             padding: 15px 40px;
-            font-size: 1rem;
+            background: none;
+            border: 1px solid rgba(255, 255, 255, 0.6);
             color: #fff;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.4);
             text-decoration: none;
             text-transform: uppercase;
-            letter-spacing: 3px;
-            transition: 0.4s;
-            backdrop-filter: blur(5px); /* Frosty glass effect */
+            letter-spacing: 4px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.4s ease;
         }
 
-        .btn-submit:hover {
-            background: #fff;
+        .btn-initialize:hover {
+            background: rgba(255, 255, 255, 1);
             color: #000;
-            box-shadow: 0 0 30px rgba(255, 255, 255, 0.6);
-            transform: translateY(-3px);
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
         }
 
-        /* 5. Section for Content */
-        .content-section {
-            padding: 100px 20px;
-            max-width: 1000px;
+        /* --- MAIN CONTENT LAYOUT (NEW SPLIT DESIGN) --- */
+        .grid-container {
+            max-width: 1400px; /* Optional: Sets a max-width for large screens */
             margin: 0 auto;
+            padding: 100px 50px;
+            display: grid;
+            grid-template-columns: 2fr 1.2fr; /* Left is wider, Right is Announcement */
+            gap: 80px; /* Distance between columns */
         }
 
-        .info-card {
-            border-left: 2px solid #fff;
-            padding-left: 30px;
-            margin-bottom: 50px;
+        /* Responsive Breakpoint for Mobile */
+        @media (max-width: 900px) {
+            .grid-container {
+                grid-template-columns: 1fr; /* Stacks on small screens */
+                gap: 50px;
+                padding: 50px 20px;
+            }
         }
 
-        .info-card h2 {
-            font-size: 2rem;
-            margin-bottom: 15px;
+        /* -- LEFT COLUMN: OBJECTIVE & STATUS (As seen in image_10.png) -- */
+        .content-left {
+            display: flex;
+            flex-direction: column;
+            gap: 60px;
+        }
+
+        .section-block {
+            padding-left: 20px;
+            border-left: 2px solid rgba(255, 255, 255, 0.15); /* Reference line from original design */
+        }
+
+        .section-block h2 {
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            margin-bottom: 25px;
             color: #fff;
+        }
+
+        .section-block p {
+            font-size: 0.9rem;
+            line-height: 2;
+            color: #ccc;
+            letter-spacing: 1px;
+            font-family: sans-serif; /* Cleaner reading for body text */
+        }
+
+        /* -- RIGHT COLUMN: ANNOUNCEMENT SECTION (NEW ADDITION) -- */
+        .content-right-announcements {
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            background-color: rgba(255, 255, 255, 0.03); /* Subtle background accent */
+            border-radius: 4px;
+        }
+
+        .content-right-announcements h2 {
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            margin-bottom: 30px;
+            color: #fff;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 15px;
+        }
+
+        .announcement-item {
+            margin-bottom: 30px;
+        }
+
+        .announcement-item p {
+            font-size: 0.85rem;
+            line-height: 1.8;
+            color: #bbb;
+            font-family: sans-serif;
+            margin-bottom: 15px;
+        }
+
+        /* Announcement Image Style */
+        .announcement-img {
+            width: 100%;
+            height: auto;
+            border-radius: 2px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: all 0.3s ease;
+        }
+        
+        .announcement-img:hover {
+            border-color: #fff;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
         }
 
     </style>
-    <!-- Import a sharp, cinematic font -->
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <!-- Main Landing Screen -->
-    <div class="hero">
-        <h1>Gabriel's Inventory Section</h1>
-        <p class="subtitle">DATA ENGINEERING // SYSTEM LIBRARY</p>
-        <a href="submit.html" class="btn-submit">Initialize Submission</a>
-    </div>
-
-    <!-- Content Area -->
-    <div class="content-section">
-        <div class="info-card">
-            <h2>OBJECTIVE</h2>
-            <p>Welcome to the central hub. This library is designed for the secure transmission of data, feedback, and collaborations. Use the link above to submit your tasks for review.</p>
+    <!-- HERO SECTION (unchanged from image_10.png) -->
+    <header class="hero-banner">
+        <div class="hero-text">
+            <h1>Gabriel's Inventory Section</h1>
+            <h3>Data Engineering // System Library</h3>
+            <a href="submit.html" class="btn-initialize">Initialize Submission</a>
         </div>
+    </header>
 
-        <div class="info-card">
-            <h2>SYSTEM STATUS</h2>
-            <p>Deployment: Active <br> Security: Enforced <br> Connection: Established</p>
-        </div>
-    </div>
+    <!-- MAIN CONTENT LAYOUT (SPLIT DESIGN) -->
+    <main class="grid-container">
+
+        <!-- LEFT COLUMN: OBJECTIVE & STATUS (As seen in image_10.png) -->
+        <section class="content-left">
+            
+            <div class="section-block">
+                <h2>Objective</h2>
+                <p>Welcome to the central hub. This library is designed for the secure transmission of data, feedback, and collaborations. Use the link above to submit your tasks for review.</p>
+            </div>
+
+            <div class="section-block">
+                <h2>System Status</h2>
+                <p>All core systems operational. Tally Ingestion Terminal connection confirmed. Awaiting data packets.</p>
+            </div>
+
+        </section>
+
+        <!-- RIGHT COLUMN: COMMAND NOTICES / ANNOUNCEMENT SECTION (NEW ADDITION) -->
+        <aside class="content-right-announcements">
+            <h2>Command Notices</h2>
+
+            <!-- Announcement Entry 1: Photo and Text -->
+            <div class="announcement-item">
+                <p>New security protocols have been established for the Tally Ingestion Terminal. Please ensure your files are under 10MB.</p>
+                
+                <!-- Replace with your own announcement image URL -->
+                <img src="https://images.alphacoders.com/135/1359670.jpeg" alt="Security Update Banner" class="announcement-img">
+            </div>
+
+            <!-- Announcement Entry 2: Text Only -->
+            <div class="announcement-item">
+                <p>Scheduled maintenance for the Data Hub will occur this Saturday. Expect minor latency.</p>
+            </div>
+
+        </aside>
+
+    </main>
 
 </body>
 </html>

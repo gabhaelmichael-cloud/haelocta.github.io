@@ -3,62 +3,115 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gabriel's Portal</title>
+    <title>Rover's Terminal</title>
     <style>
-        /* Custom Decorations */
+        /* 1. Global Styles - Dark Gaming Theme */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f4f7f6;
+            background-color: #050505; /* Deep black background */
+            color: #e0e0e0;
+            font-family: 'Cinzel', serif, system-ui; /* Sharp, high-fantasy style */
+            overflow-x: hidden;
         }
-        .header {
-            background: #24292e;
-            color: white;
-            padding: 2rem;
-            border-radius: 10px;
+
+        /* 2. Hero Background Image */
+        .hero {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            /* Replace the URL below with a high-res wallpaper you like */
+            background: linear-gradient(rgba(0,0,0,0.3), #050505), 
+                        url('https://images.alphacoders.com/135/1359670.jpeg'); 
+            background-size: cover;
+            background-position: center;
             text-align: center;
-            margin-bottom: 20px;
         }
-        .card {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
+
+        /* 3. Text Glow & Animations */
+        h1 {
+            font-size: 4rem;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            text-shadow: 0 0 20px rgba(255,255,255,0.5);
+            margin-bottom: 10px;
         }
-        h2 { color: #0366d6; }
-        .btn {
-            display: inline-block;
-            background: #2ea44f;
-            color: white;
-            padding: 10px 20px;
+
+        p.subtitle {
+            font-size: 1.2rem;
+            color: #aaa;
+            margin-bottom: 30px;
+            letter-spacing: 2px;
+        }
+
+        /* 4. The Submission Button - Glowing Effect */
+        .btn-submit {
+            padding: 15px 40px;
+            font-size: 1rem;
+            color: #fff;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.4);
             text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            transition: 0.4s;
+            backdrop-filter: blur(5px); /* Frosty glass effect */
         }
-        .btn:hover { background: #2c974b; }
+
+        .btn-submit:hover {
+            background: #fff;
+            color: #000;
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.6);
+            transform: translateY(-3px);
+        }
+
+        /* 5. Section for Content */
+        .content-section {
+            padding: 100px 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .info-card {
+            border-left: 2px solid #fff;
+            padding-left: 30px;
+            margin-bottom: 50px;
+        }
+
+        .info-card h2 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
     </style>
+    <!-- Import a sharp, cinematic font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <div class="header">
-        <h1>Welcome to My Website</h1>
-        <p>A place for my friends to share and collaborate.</p>
+    <!-- Main Landing Screen -->
+    <div class="hero">
+        <h1>GABRIEL JANA</h1>
+        <p class="subtitle">DATA ENGINEER // SYSTEM TERMINAL</p>
+        <a href="submit.html" class="btn-submit">Initialize Submission</a>
     </div>
 
-    <div class="card">
-        <h2>About This Project</h2>
-        <p>I'm building this site to collect and review submissions from my friends. Stay tuned for more updates!</p>
-    </div>
+    <!-- Content Area -->
+    <div class="content-section">
+        <div class="info-card">
+            <h2>MISSION OBJECTIVE</h2>
+            <p>Welcome to the central hub. This terminal is designed for the secure transmission of data, feedback, and collaborations. Use the link above to submit your reports for review.</p>
+        </div>
 
-    <div class="card">
-        <h2>Submit Something</h2>
-        <p>Ready to share your thoughts or files with me?</p>
-        <a href="submit.html" class="btn">Go to Submission Page</a>
+        <div class="info-card">
+            <h2>SYSTEM STATUS</h2>
+            <p>Deployment: Active <br> Security: Enforced <br> Connection: Established</p>
+        </div>
     </div>
 
 </body>

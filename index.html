@@ -21,17 +21,15 @@
             overflow-x: hidden;
         }
 
-        /* --- TOP BANNER (As seen in image_10.png) --- */
+        /* --- TOP BANNER --- */
         .hero-banner {
             position: relative;
             width: 100%;
-            height: 60vh; /* Banner takes up 60% of the screen */
+            height: 60vh;
             display: flex;
             justify-content: center;
             align-items: center;
             text-align: center;
-            
-            /* Reference Background Image from original design */
             background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.9)), 
                               url('https://images.alphacoders.com/135/1359670.jpeg');
             background-size: cover;
@@ -75,66 +73,65 @@
             box-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
         }
 
-        /* --- MAIN CONTENT LAYOUT (NEW SPLIT DESIGN) --- */
+        /* --- MAIN CONTENT LAYOUT --- */
         .grid-container {
-            max-width: 1400px; /* Optional: Sets a max-width for large screens */
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 100px 50px;
+            padding: 80px 50px;
             display: grid;
-            grid-template-columns: 2fr 1.2fr; /* Left is wider, Right is Announcement */
-            gap: 80px; /* Distance between columns */
+            grid-template-columns: 2fr 1.2fr;
+            gap: 60px;
         }
 
-        /* Responsive Breakpoint for Mobile */
         @media (max-width: 900px) {
             .grid-container {
-                grid-template-columns: 1fr; /* Stacks on small screens */
-                gap: 50px;
-                padding: 50px 20px;
+                grid-template-columns: 1fr;
+                padding: 40px 20px;
             }
         }
 
-        /* -- LEFT COLUMN: OBJECTIVE & STATUS (As seen in image_10.png) -- */
+        /* -- LEFT COLUMN -- */
         .content-left {
             display: flex;
             flex-direction: column;
-            gap: 60px;
+            gap: 50px;
         }
 
         .section-block {
             padding-left: 20px;
-            border-left: 2px solid rgba(255, 255, 255, 0.15); /* Reference line from original design */
+            border-left: 2px solid rgba(255, 255, 255, 0.15);
         }
 
         .section-block h2 {
             font-size: 1.5rem;
             text-transform: uppercase;
-            letter-spacing: 5px;
-            margin-bottom: 25px;
+            letter-spacing: 4px;
+            margin-bottom: 20px;
             color: #fff;
         }
 
         .section-block p {
-            font-size: 0.9rem;
-            line-height: 2;
+            font-size: 0.95rem;
+            line-height: 1.8;
             color: #ccc;
             letter-spacing: 1px;
-            font-family: sans-serif; /* Cleaner reading for body text */
+            font-family: sans-serif;
         }
 
-        /* -- RIGHT COLUMN: ANNOUNCEMENT SECTION (NEW ADDITION) -- */
+        /* -- RIGHT COLUMN: ANNOUNCEMENTS -- */
         .content-right-announcements {
             border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 40px;
-            background-color: rgba(255, 255, 255, 0.03); /* Subtle background accent */
+            padding: 30px;
+            background-color: rgba(255, 255, 255, 0.02);
             border-radius: 4px;
+            height: fit-content;
         }
 
         .content-right-announcements h2 {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             text-transform: uppercase;
-            letter-spacing: 5px;
-            margin-bottom: 30px;
+            letter-spacing: 4px;
+            margin-bottom: 25px;
             color: #fff;
             text-align: center;
             border-bottom: 1px solid rgba(255,255,255,0.1);
@@ -142,36 +139,39 @@
         }
 
         .announcement-item {
-            margin-bottom: 30px;
+            margin-bottom: 35px;
+        }
+
+        .announcement-link {
+            color: #fff;
+            text-decoration: underline;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+
+        .announcement-link:hover {
+            color: #87CEEB; /* Sky blue hover */
         }
 
         .announcement-item p {
             font-size: 0.85rem;
-            line-height: 1.8;
+            line-height: 1.6;
             color: #bbb;
             font-family: sans-serif;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
 
-        /* Announcement Image Style */
         .announcement-img {
             width: 100%;
             height: auto;
-            border-radius: 2px;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 10px;
         }
-        
-        .announcement-img:hover {
-            border-color: #fff;
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
-        }
-
     </style>
 </head>
 <body>
 
-    <!-- HERO SECTION (unchanged from image_10.png) -->
     <header class="hero-banner">
         <div class="hero-text">
             <h1>Gabriel's Inventory Section</h1>
@@ -180,14 +180,12 @@
         </div>
     </header>
 
-    <!-- MAIN CONTENT LAYOUT (SPLIT DESIGN) -->
     <main class="grid-container">
 
-        <!-- LEFT COLUMN: OBJECTIVE & STATUS (As seen in image_10.png) -->
+        <!-- LEFT COLUMN -->
         <section class="content-left">
-            
             <div class="section-block">
-                <h2>Hello, welcome to my main page of Gabriel's library.</h2>
+                <h2>Hello, Welcome to my main page of Gabriel's Library.</h2>
                 <p>Welcome to the central hub. This library is designed for the secure transmission of data, feedback, and collaborations. Use the link above to submit your tasks for review. Stay tune as the page is still in development.</p>
             </div>
 
@@ -195,28 +193,23 @@
                 <h2>System Status</h2>
                 <p>All core systems operational. Tally Ingestion Terminal connection confirmed. Awaiting data packets.</p>
             </div>
-
         </section>
 
-        <!-- RIGHT COLUMN: COMMAND NOTICES / ANNOUNCEMENT SECTION (NEW ADDITION) -->
+        <!-- RIGHT COLUMN: ANNOUNCEMENTS -->
         <aside class="content-right-announcements">
-            <h2>ANNOUNCEMENTS</h2>
+            <h2>Announcements</h2>
 
-            <!-- Announcement Entry 1: Photo and Text -->
             <div class="announcement-item">
-                <p>Java Programming.</p>
-                <p> </p>
-                
-                
-                <!-- Replace with your own announcement image URL -->
-                <img src="https://images.alphacoders.com/135/1359670.jpeg" alt="Security Update Banner" class="announcement-img">
+                <p>
+                    <a href="java.html" class="announcement-link">Java Programming.</a>
+                </p>
+                <!-- Remember to upload your photo to GitHub and update this path -->
+                <img src="images/security_banner.jpg" alt="SECURITY UPDATE BANNER" class="announcement-img">
             </div>
 
-            <!-- Announcement Entry 2: Text Only -->
             <div class="announcement-item">
                 <p>Scheduled maintenance for the Data Hub will occur this Saturday. Expect minor latency.</p>
             </div>
-
         </aside>
 
     </main>

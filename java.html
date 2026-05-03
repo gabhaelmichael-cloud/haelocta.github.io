@@ -3,32 +3,114 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Java Programming | Discussion</title>
+    <title>Java Programming | System Documentation</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body { 
             background-color: #000; 
             color: #fff; 
             font-family: 'Cinzel', serif; 
-            padding: 50px; 
+            padding: 40px; 
             line-height: 1.6;
         }
-        .container { max-width: 800px; margin: 0 auto; }
-        h1 { border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 20px; letter-spacing: 5px; }
-        .back-link { color: #888; text-decoration: none; font-size: 0.8rem; letter-spacing: 2px; }
+        .container { max-width: 1000px; margin: 0 auto; }
+        header { border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 20px; margin-bottom: 40px; }
+        h1 { letter-spacing: 5px; margin-top: 10px; }
+        h2 { color: #87CEEB; letter-spacing: 3px; text-transform: uppercase; margin-top: 50px; border-left: 4px solid #87CEEB; padding-left: 15px; }
+        h3 { color: #ccc; margin-top: 25px; text-decoration: underline; }
+        
+        .back-link { color: #888; text-decoration: none; font-size: 0.8rem; letter-spacing: 2px; transition: 0.3s; }
         .back-link:hover { color: #fff; }
-        .content-area { margin-top: 40px; color: #ccc; font-family: sans-serif; }
+        
+        .doc-section { background: rgba(255,255,255,0.03); padding: 30px; border-radius: 8px; margin-bottom: 30px; border: 1px solid rgba(255,255,255,0.05); }
+        .specs-list { list-style: none; padding: 0; }
+        .specs-list li { margin-bottom: 15px; padding-left: 20px; position: relative; font-family: sans-serif; color: #bbb; }
+        .specs-list li::before { content: ">"; position: absolute; left: 0; color: #87CEEB; }
+        
+        .table-container { overflow-x: auto; margin-top: 20px; }
+        table { width: 100%; border-collapse: collapse; font-family: sans-serif; font-size: 0.9rem; }
+        th, td { border: 1px solid rgba(255,255,255,0.1); padding: 12px; text-align: left; }
+        th { background: rgba(135, 206, 235, 0.1); color: #87CEEB; }
+        
+        .uml-box { background: #111; padding: 20px; border: 1px dashed #444; font-family: monospace; color: #00ff00; margin: 20px 0; }
     </style>
 </head>
 <body>
     <div class="container">
-        <a href="index.html" class="back-link">← RETURN TO HUB</a>
-        <h1>Java Programming</h1>
-        
-        <div class="content-area">
-            <!-- Insert your discussion or text here -->
-            <p>Welcome to the Java Programming discussion area. Post your notes or updates here.</p>
-        </div>
+        <header>
+            <a href="index.html" class="back-link">← RETURN TO SYSTEM HUB</a>
+            <h1>Java Programming Documentation</h1>
+        </header>
+
+        <!-- SECTION 1: GROUP ASSIGNMENT -->
+        <section class="doc-section">
+            <h2>1. Group Assignment: Encoded Cipher GUI</h2>
+            <p><strong>Objective:</strong> Design a Java Swing application that generates a traceable encoded string using a hidden, group-specific shift key[cite: 1].</p>
+            
+            <h3>Technical Requirements</h3>
+            <ul class="specs-list">
+                <li><strong>Class Structure:</strong> Implement the <code>Encoded</code> class featuring <code>inputText</code>, <code>charCount</code>, and a hardcoded <code>groupID</code>[cite: 1].</li>
+                <li><strong>Validation:</strong> Input must be alphanumeric (lowercase only) and spaces[cite: 1].</li>
+                <li><strong>Shift Logic:</strong> Final Shift = (Group Shift from <code>hashCode()</code>) + (Number of non-space characters)[cite: 1].</li>
+                <li><strong>GUI Elements:</strong> Java Swing components including an Input text field, Encode button, and a Results display area[cite: 1].</li>
+            </ul>
+
+            <div class="uml-box">
+                class Encoded {<br>
+                &nbsp;&nbsp;inputText: String<br>
+                &nbsp;&nbsp;groupID: String (Hidden)<br>
+                &nbsp;&nbsp;+ countCharacters(): int<br>
+                &nbsp;&nbsp;+ checkStringValidity(): boolean<br>
+                &nbsp;&nbsp;+ applyCipher(): String<br>
+                }
+            </div>
+            <p><em>Deadline: 24th May 2026, 11:59 PM[cite: 1].</em></p>
+        </section>
+
+        <!-- SECTION 2: FINAL PROJECT -->
+        <section class="doc-section">
+            <h2>2. Final Project: SDG Sustainable Learning App</h2>
+            <p><strong>Theme:</strong> Sustainable Development Goals (SDGs) Desktop Application[cite: 2].</p>
+
+            <h3>Application Architecture</h3>
+            <ul class="specs-list">
+                <li><strong>Structure:</strong> Minimum of 4 classes and 4 interfaces (non-GUI)[cite: 2].</li>
+                <li><strong>Educational Module:</strong> At least 10 pages of content featuring text and images[cite: 2].</li>
+                <li><strong>Quiz Module:</strong> 20+ questions (Multiple Choice, True/False, etc.) with motivational scoring[cite: 2].</li>
+                <li><strong>Gamification:</strong> Integration of badges, points, stars, or leaderboards[cite: 2].</li>
+                <li><strong>Data Persistence:</strong> Storage of user scores via Text file, Array, or Java DB[cite: 2].</li>
+            </ul>
+
+            <h3>Milestone Schedule</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Phase</th>
+                            <th>Deliverable</th>
+                            <th>Deadline</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Design</td>
+                            <td>UML Diagrams & Class Distribution (PDF)</td>
+                            <td>5th June 2026, 5:00 PM[cite: 2]</td>
+                        </tr>
+                        <tr>
+                            <td>Implementation</td>
+                            <td>Java Source Code & Application Interface (ZIP)</td>
+                            <td>5th June 2026, 5:00 PM[cite: 2]</td>
+                        </tr>
+                        <tr>
+                            <td>Assessment</td>
+                            <td>Final Project Presentation</td>
+                            <td>Week 14 (8-12 June 2026)[cite: 2]</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
     </div>
 </body>
 </html>

@@ -2,165 +2,98 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <title>Data Submission Terminal</title>
-    <!-- Load Supabase Library -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <style>
+    <!-- Tally Embed Script -->
+    <script async src="https://tally.so/widgets/embed.js"></script>
+    <style type="text/css">
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
-        body {
-            background-color: #050505;
+        body { 
+            background-color: #050505; 
             color: #e0e0e0;
             font-family: 'Cinzel', serif, system-ui;
+            height: 100vh;
             display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), 
+            flex-direction: column;
+            overflow: hidden; /* Keeps the terminal look clean */
+            background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), 
                         url('https://images.alphacoders.com/135/1359670.jpeg');
             background-size: cover;
             background-position: center;
-            background-attachment: fixed;
         }
 
-        .form-container {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 50px 40px;
-            width: 90%;
-            max-width: 500px;
-            border-radius: 4px;
-            box-shadow: 0 0 50px rgba(0,0,0,0.8);
+        .header-bar {
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
         }
 
         h2 {
             text-transform: uppercase;
             letter-spacing: 6px;
-            margin-bottom: 30px;
-            text-align: center;
+            font-size: 1.2rem;
             color: #fff;
         }
 
-        input, textarea {
+        .iframe-container {
+            flex-grow: 1;
+            position: relative;
             width: 100%;
+        }
+
+        iframe { 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            border: 0; 
+        }
+
+        .footer-nav {
             padding: 15px;
-            margin-bottom: 20px;
-            background: rgba(0, 0, 0, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            color: #fff;
-            font-family: sans-serif;
-        }
-
-        .btn-send {
-            width: 100%;
-            padding: 18px;
-            background: none;
-            border: 1px solid #fff;
-            color: #fff;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: 0.4s;
-        }
-
-        .btn-send:hover {
-            background: #fff;
-            color: #000;
-        }
-
-        #status {
-            margin-top: 20px;
-            font-size: 0.8rem;
             text-align: center;
-            letter-spacing: 2px;
-            color: #888;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
         }
 
         .back-link {
-            display: block;
-            text-align: center;
-            margin-top: 30px;
             color: #444;
             text-decoration: none;
             font-size: 0.7rem;
+            letter-spacing: 2px;
+            transition: 0.3s;
+        }
+
+        .back-link:hover {
+            color: #fff;
         }
     </style>
 </head>
 <body>
 
-    <div class="form-container">
+    <div class="header-bar">
         <h2>Ingestion Terminal</h2>
-        
-        <input type="text" id="operator_id" placeholder="OPERATOR ID" required>
-        <input type="file" id="file_input">
-        <textarea id="notes" placeholder="TRANSMISSION NOTES" rows="3"></textarea>
+    </div>
 
-        <button id="upload_btn" class="btn-send">Execute Transmission</button>
-        
-        <p id="status">STANDBY...</p>
+    <div class="iframe-container">
+        <!-- Tally Iframe -->
+        <iframe 
+            data-tally-src="https://tally.so/r/rj2VML?transparentBackground=1" 
+            width="100%" 
+            height="100%" 
+            frameborder="0" 
+            marginheight="0" 
+            marginwidth="0" 
+            title="Upload the File">
+        </iframe>
+    </div>
 
+    <div class="footer-nav">
         <a href="index.html" class="back-link">TERMINATE SESSION & RETURN</a>
     </div>
 
-    <script>
-        // Integrated Credentials
-        const SUPABASE_URL = 'https://sfgyjnnohojlqjpmwzyi.supabase.co';
-        const SUPABASE_KEY = 'sb_publishable_CZj_VR1_W1w10ve0i8J3Ew_HkjZWoE4';
-        
-        const { createClient } = supabase;
-        const _supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
-
-        document.getElementById('upload_btn').addEventListener('click', async () => {
-            const fileInput = document.getElementById('file_input');
-            const file = fileInput.files[0];
-            const operatorId = document.getElementById('operator_id').value;
-            const notes = document.getElementById('notes').value;
-            const status = document.getElementById('status');
-
-            if (!file || !operatorId) {
-                status.innerText = "ERROR: ID AND FILE REQUIRED";
-                return;
-            }
-
-            try {
-                status.innerText = "INITIALIZING UPLOAD...";
-
-                // 1. Upload to Storage Bucket (Corrected to 'transmission')
-                const fileExt = file.name.split('.').pop();
-                const fileName = `${Date.now()}.${fileExt}`;
-                
-                const { data: storageData, error: storageError } = await _supabase.storage
-                    .from('transmission')
-                    .upload(fileName, file);
-
-                if (storageError) throw storageError;
-
-                // 2. Get Public URL
-                const { data: urlData } = _supabase.storage
-                    .from('transmission')
-                    .getPublicUrl(fileName);
-
-                // 3. Save Record to SQL Table (uploads)
-                const { error: dbError } = await _supabase
-                    .from('uploads')
-                    .insert([{ 
-                        operator_id: operatorId, 
-                        file_url: urlData.publicUrl, 
-                        notes: notes 
-                    }]);
-
-                if (dbError) throw dbError;
-
-                status.innerText = "TRANSMISSION SUCCESSFUL";
-
-            } catch (err) {
-                console.error(err);
-                status.innerText = "SYSTEM ERROR: " + err.message;
-            }
-        });
-    </script>
 </body>
 </html>

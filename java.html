@@ -6,33 +6,87 @@
     <title>Java Programming | System Documentation</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        body { 
-            background-color: #000; 
-            color: #fff; 
-            font-family: 'Cinzel', serif; 
-            padding: 40px; 
-            line-height: 1.6;
-        }
-        .container { max-width: 1000px; margin: 0 auto; }
-        header { border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 20px; margin-bottom: 40px; }
-        h1 { letter-spacing: 5px; margin-top: 10px; }
-        h2 { color: #87CEEB; letter-spacing: 3px; text-transform: uppercase; margin-top: 50px; border-left: 4px solid #87CEEB; padding-left: 15px; }
-        h3 { color: #ccc; margin-top: 25px; text-decoration: underline; }
+        /* CSS RESET */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         
+        body { 
+            /* -- DATA ENGINEER ACTION REQUIRED: UPDATE THIS PATH -- */
+            background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.95)), 
+                              url('frieren-wallpaper-4k-made-by-me-3-v0-for3cbmfqjoc1.jpg'); 
+            
+            /* Professional background configuration */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Keeps image static while scrolling text */
+            background-color: #000;
+            
+            color: #fff; 
+            font-family: 'Cinzel', serif, system-ui;
+            padding: 50px 20px; /* Side padding for mobile friendliness */
+            line-height: 1.7;
+        }
+
+        .container { max-width: 1000px; margin: 0 auto; }
+        
+        header { 
+            border-bottom: 1px solid rgba(255,255,255,0.1); 
+            padding-bottom: 25px; 
+            margin-bottom: 40px; 
+        }
+        
+        h1 { font-size: 2.2rem; letter-spacing: 5px; margin-top: 10px; }
+        
+        /* Specialized styling for subheadings */
+        h2 { 
+            color: #87CEEB; /* Cinematic Sky Blue Accent */
+            letter-spacing: 3px; 
+            text-transform: uppercase; 
+            margin-top: 50px; 
+            border-left: 4px solid #87CEEB; 
+            padding-left: 15px; 
+            font-size: 1.4rem;
+        }
+        
+        h3 { color: #ccc; margin-top: 25px; text-decoration: underline; font-size: 1.1rem; }
+        
+        /* Navigation Links */
         .back-link { color: #888; text-decoration: none; font-size: 0.8rem; letter-spacing: 2px; transition: 0.3s; }
         .back-link:hover { color: #fff; }
         
-        .doc-section { background: rgba(255,255,255,0.03); padding: 30px; border-radius: 8px; margin-bottom: 30px; border: 1px solid rgba(255,255,255,0.05); }
+        /* Content Blocks */
+        .doc-section { 
+            background: rgba(255,255,255,0.03); /* Subtle backdrop accent */
+            padding: 30px; 
+            border-radius: 4px; 
+            margin-bottom: 30px; 
+            border: 1px solid rgba(255,255,255,0.05); 
+        }
+
+        .doc-section p { font-size: 0.95rem; font-family: sans-serif; color: #ccc; margin-bottom: 20px;}
+        
+        /* Required list styling */
         .specs-list { list-style: none; padding: 0; }
-        .specs-list li { margin-bottom: 15px; padding-left: 20px; position: relative; font-family: sans-serif; color: #bbb; }
-        .specs-list li::before { content: ">"; position: absolute; left: 0; color: #87CEEB; }
+        .specs-list li { margin-bottom: 15px; padding-left: 20px; position: relative; font-family: sans-serif; color: #bbb; font-size: 0.9rem;}
+        .specs-list li::before { content: ">"; position: absolute; left: 0; color: #87CEEB; font-weight: bold;}
         
-        .table-container { overflow-x: auto; margin-top: 20px; }
-        table { width: 100%; border-collapse: collapse; font-family: sans-serif; font-size: 0.9rem; }
-        th, td { border: 1px solid rgba(255,255,255,0.1); padding: 12px; text-align: left; }
-        th { background: rgba(135, 206, 235, 0.1); color: #87CEEB; }
+        /* Table responsive container */
+        .table-container { overflow-x: auto; margin-top: 25px; }
         
-        .uml-box { background: #111; padding: 20px; border: 1px dashed #444; font-family: monospace; color: #00ff00; margin: 20px 0; }
+        /* Requirements Table Styling */
+        table { width: 100%; min-width: 600px; border-collapse: collapse; font-family: sans-serif; font-size: 0.85rem; color: #ccc;}
+        th, td { border: 1px solid rgba(255,255,255,0.08); padding: 14px; text-align: left; }
+        th { background: rgba(135, 206, 235, 0.08); color: #87CEEB; text-transform: uppercase; letter-spacing: 1px; }
+        td { background: rgba(0, 0, 0, 0.15); }
+        
+        /* Unified Modeling Language (UML) notation box */
+        .uml-box { background: #080808; padding: 20px; border: 1px dashed #333; font-family: monospace; color: #00ff00; margin: 25px 0; font-size: 0.8rem;}
+        
+        /* Mobile Media Query for Typography */
+        @media screen and (max-width: 768px) {
+            h1 { font-size: 1.8rem; }
+            h2 { font-size: 1.2rem; }
+            .doc-section { padding: 20px; }
+        }
     </style>
 </head>
 <body>
@@ -42,69 +96,80 @@
             <h1>Java Programming Documentation</h1>
         </header>
 
-        <!-- SECTION 1: GROUP ASSIGNMENT -->
+        <!-- SUB-SECTION 1: GROUP ASSIGNMENT -->
         <section class="doc-section">
-            <h2>1. Group Assignment: Encoded Cipher GUI</h2>
-            <p><strong>Objective:</strong> Design a Java Swing application that generates a traceable encoded string using a hidden, group-specific shift key[cite: 1].</p>
+            <h2>1. Group Assignment: Encoded Cipher GUI[cite: 1]</h2>
+            <p><strong>Objective:</strong> Design and implement a Java Swing application to generate a traceable encoded string using a embedded, unique group-specific shift key[cite: 1].</p>
             
             <h3>Technical Requirements</h3>
             <ul class="specs-list">
-                <li><strong>Class Structure:</strong> Implement the <code>Encoded</code> class featuring <code>inputText</code>, <code>charCount</code>, and a hardcoded <code>groupID</code>[cite: 1].</li>
-                <li><strong>Validation:</strong> Input must be alphanumeric (lowercase only) and spaces[cite: 1].</li>
-                <li><strong>Shift Logic:</strong> Final Shift = (Group Shift from <code>hashCode()</code>) + (Number of non-space characters)[cite: 1].</li>
-                <li><strong>GUI Elements:</strong> Java Swing components including an Input text field, Encode button, and a Results display area[cite: 1].</li>
+                <li><strong>Class Structure:</strong> Create the class <code>Encoded</code> with `inputText`, `charCount`, `resultText`, and a hidden `groupID` (e.g., G08/NC-G18)[cite: 1].</li>
+                <li><strong>Validation:</strong> Input must accept only alphanumeric (lowercase only) and spaces. Display error on invalid input[cite: 1].</li>
+                <li><strong>Hashing Mechanism:</strong> Generate `groupShift` using <code>groupID.hashCode()</code>[cite: 1].</li>
+                <li><strong>Shift Calculation:</strong> Final Shift = `groupShift` + (Number of non-space characters)[cite: 1].</li>
+                <li><strong>Encoding:</strong> Shift lowercase letters and digits; spaces remain unchanged. The encoded traceable output must be generated from user input[cite: 1].</li>
+                <li><strong>GUI Elements:</strong> Use Java Swing for Input Text Field, Encode Button, and Display Area for results (Count, Final Shift, and Encoded Result)[cite: 1].</li>
             </ul>
 
             <div class="uml-box">
                 class Encoded {<br>
                 &nbsp;&nbsp;inputText: String<br>
-                &nbsp;&nbsp;groupID: String (Hidden)<br>
-                &nbsp;&nbsp;+ countCharacters(): int<br>
-                &nbsp;&nbsp;+ checkStringValidity(): boolean<br>
-                &nbsp;&nbsp;+ applyCipher(): String<br>
+                &nbsp;&nbsp;charCount: int<br>
+                &nbsp;&nbsp;resultText: String<br>
+                &nbsp;&nbsp;groupID: String (Internally defined, Hidden)<br>
+                &nbsp;&nbsp;+ Encoded(inputText: String)<br>
+                &nbsp;&nbsp;+ countCharacters(inputText: String): int<br>
+                &nbsp;&nbsp;+ checkStringValidity(inputText: String): boolean<br>
+                &nbsp;&nbsp;+ generateShift(): int<br>
+                &nbsp;&nbsp;+ applyCipher(inputText: String, shift: int): String<br>
                 }
             </div>
             <p><em>Deadline: 24th May 2026, 11:59 PM[cite: 1].</em></p>
         </section>
 
-        <!-- SECTION 2: FINAL PROJECT -->
+        <!-- SUB-SECTION 2: FINAL PROJECT -->
         <section class="doc-section">
-            <h2>2. Final Project: SDG Sustainable Learning App</h2>
-            <p><strong>Theme:</strong> Sustainable Development Goals (SDGs) Desktop Application[cite: 2].</p>
+            <h2>2. Final Project: SDG Sustainable Learning App[cite: 2]</h2>
+            <p><strong>Theme:</strong> Sustainable Development Goals (SDGs) Desktop Application with educational content, quizzes, and gamification elements[cite: 2].</p>
 
             <h3>Application Architecture</h3>
             <ul class="specs-list">
-                <li><strong>Structure:</strong> Minimum of 4 classes and 4 interfaces (non-GUI)[cite: 2].</li>
-                <li><strong>Educational Module:</strong> At least 10 pages of content featuring text and images[cite: 2].</li>
-                <li><strong>Quiz Module:</strong> 20+ questions (Multiple Choice, True/False, etc.) with motivational scoring[cite: 2].</li>
-                <li><strong>Gamification:</strong> Integration of badges, points, stars, or leaderboards[cite: 2].</li>
-                <li><strong>Data Persistence:</strong> Storage of user scores via Text file, Array, or Java DB[cite: 2].</li>
+                <li><strong>Composition:</strong> Structured with minimum 4 classes and 4 non-GUI interfaces (one per member)[cite: 2].</li>
+                <li><strong>Educational Module:</strong> Min 10 pages/screens of educational content, including text and images[cite: 2].</li>
+                <li><strong>Quiz Module:</strong> Min 20 questions with multiple types (MCQ, True/False, etc.). Scoring message displayed (e.g., 80-100%: Outstanding!)[cite: 2].</li>
+                <li><strong>Gamification:</strong> Implement badges, points, stars, timers, or leaderboards to enhance engagement[cite: 2].</li>
+                <li><strong>Data Persistence:</strong> Store scores via Text file, Array, or simple database[cite: 2].</li>
+                <li><strong>Execution:</strong> Command line execution requirement[cite: 2].</li>
             </ul>
 
-            <h3>Milestone Schedule</h3>
+            <h3>Milestone Schedule & Evaluation</h3>
             <div class="table-container">
                 <table>
                     <thead>
                         <tr>
                             <th>Phase</th>
                             <th>Deliverable</th>
+                            <th>Components</th>
                             <th>Deadline</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Design</td>
-                            <td>UML Diagrams & Class Distribution (PDF)</td>
+                            <td>Project Design</td>
+                            <td>UML Diagrams & Documentation (PDF)[cite: 2]</td>
+                            <td>Structure explanation, UML Diagrams, Cover Page, Discussion Screenshots[cite: 2]</td>
                             <td>5th June 2026, 5:00 PM[cite: 2]</td>
                         </tr>
                         <tr>
-                            <td>Implementation</td>
-                            <td>Java Source Code & Application Interface (ZIP)</td>
+                            <td>Project Output</td>
+                            <td>Java Code & Presentation Materials (ZIP)[cite: 2]</td>
+                            <td>Source Files with creator/tester comments, Signature on Cover Document, Interactive Screenshots, QA/Testing Proof[cite: 2]</td>
                             <td>5th June 2026, 5:00 PM[cite: 2]</td>
                         </tr>
                         <tr>
-                            <td>Assessment</td>
-                            <td>Final Project Presentation</td>
+                            <td>Individual Assessment</td>
+                            <td>Presentation & Contribution Review[cite: 2]</td>
+                            <td>Compulsory Presentation (Week 14), Contribution review (Member must code min one class and interface)[cite: 2]</td>
                             <td>Week 14 (8-12 June 2026)[cite: 2]</td>
                         </tr>
                     </tbody>

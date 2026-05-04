@@ -2,12 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <!-- Responsive viewport for mobile compatibility -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gabriel's Inventory Section | Data Engineering</title>
+    <title>Gabriel's Inventory Section | System Library</title>
     
-    <!-- Load Cinzel Font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Load Cinematic Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
@@ -15,95 +14,109 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body { 
-            background-color: #000000; 
-            color: #e0e0e0;
+            /* -- DATA ENGINEER ACTION REQUIRED: UPDATE THIS PATH -- */
+            /* The linear-gradient adds a dark overlay to make text pop against the image */
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)), 
+                              url('frieren-wallpaper-4k-made-by-me-3-v0-for3cbmfqjoc1.jpg'); 
+            
+            /* Core background settings for a professional look */
+            background-size: cover;          /* Image scales to fit whole screen */
+            background-position: center;     /* Centers the background artwork */
+            background-attachment: fixed;    /* Photo stays still while you scroll */
+            background-color: #000;          /* Fallback color if image fails to load */
+            
+            color: #e0e0e0;                  /* Light text for dark background */
             font-family: 'Cinzel', serif, system-ui;
             overflow-x: hidden;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
-        /* --- TOP BANNER --- */
-        .hero-banner {
-            position: relative;
+        /* --- HEADER SECTION --- */
+        header {
             width: 100%;
-            height: 60vh;
+            height: 50vh; /* Banner takes up 50% of the screen height */
             display: flex;
             justify-content: center;
             align-items: center;
             text-align: center;
-            background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.9)), 
-                              url('https://images.alphacoders.com/135/1359670.jpeg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* Subtle separation */
         }
 
-        .hero-text h1 {
-            font-size: 3rem;
+        .header-text h1 {
+            font-size: 2.8rem;
             text-transform: uppercase;
-            letter-spacing: 12px;
+            letter-spacing: 10px;
             margin-bottom: 10px;
-            text-shadow: 0 0 30px rgba(255, 255, 255, 0.7);
+            text-shadow: 0 0 25px rgba(255, 255, 255, 0.6); /* Cinematic Glow */
+            color: #fff;
         }
 
-        .hero-text h3 {
+        .header-text h3 {
             font-size: 0.9rem;
             text-transform: uppercase;
-            letter-spacing: 6px;
+            letter-spacing: 5px;
             margin-bottom: 40px;
             color: #aaa;
         }
 
+        /* INITIALIZE SUBMISSION BUTTON */
         .btn-initialize {
             display: inline-block;
-            padding: 15px 40px;
+            padding: 15px 35px;
             background: none;
-            border: 1px solid rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.5);
             color: #fff;
             text-decoration: none;
             text-transform: uppercase;
             letter-spacing: 4px;
+            font-size: 0.8rem;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.4s ease;
         }
 
         .btn-initialize:hover {
-            background: rgba(255, 255, 255, 1);
+            background: #fff;
             color: #000;
-            box-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.4);
         }
 
-        /* --- MAIN CONTENT LAYOUT --- */
+        /* --- MAIN CONTENT GRID LAYOUT --- */
         .grid-container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 80px 50px;
+            padding: 60px 40px;
             display: grid;
-            grid-template-columns: 2fr 1.2fr;
-            gap: 60px;
+            grid-template-columns: 2fr 1fr; /* 2 parts Objective, 1 part Announcement */
+            gap: 50px;
+            flex-grow: 1; /* Pushes content down on large screens */
         }
 
-        @media (max-width: 900px) {
+        /* Responsive Breakpoint for Mobile */
+        @media screen and (max-width: 900px) {
             .grid-container {
-                grid-template-columns: 1fr;
+                grid-template-columns: 1fr; /* Stacks column on small screens */
+                gap: 40px;
                 padding: 40px 20px;
             }
         }
 
-        /* -- LEFT COLUMN -- */
+        /* -- LEFT COLUMN: OBJECTIVE & STATUS -- */
         .content-left {
             display: flex;
             flex-direction: column;
-            gap: 50px;
+            gap: 40px;
         }
 
         .section-block {
             padding-left: 20px;
-            border-left: 2px solid rgba(255, 255, 255, 0.15);
+            border-left: 2px solid rgba(255, 255, 255, 0.1);
         }
 
         .section-block h2 {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             text-transform: uppercase;
             letter-spacing: 4px;
             margin-bottom: 20px;
@@ -111,35 +124,35 @@
         }
 
         .section-block p {
-            font-size: 0.95rem;
-            line-height: 1.8;
+            font-size: 0.9rem;
+            line-height: 1.9;
             color: #ccc;
             letter-spacing: 1px;
-            font-family: sans-serif;
+            font-family: sans-serif; /* Clean font for reading body text */
         }
 
-        /* -- RIGHT COLUMN: ANNOUNCEMENTS -- */
+        /* -- RIGHT COLUMN: ANNOUNCEMENTS (As seen in image_7.png) -- */
         .content-right-announcements {
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             padding: 30px;
-            background-color: rgba(255, 255, 255, 0.02);
+            background-color: rgba(0, 0, 0, 0.25); /* Semi-transparent box for contrast */
             border-radius: 4px;
             height: fit-content;
         }
 
         .content-right-announcements h2 {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             text-transform: uppercase;
             letter-spacing: 4px;
             margin-bottom: 25px;
             color: #fff;
             text-align: center;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
             padding-bottom: 15px;
         }
 
         .announcement-item {
-            margin-bottom: 35px;
+            margin-bottom: 30px;
         }
 
         .announcement-link {
@@ -151,11 +164,11 @@
         }
 
         .announcement-link:hover {
-            color: #87CEEB; /* Sky blue hover */
+            color: #87CEEB; /* Subtle sky blue hover effect */
         }
 
         .announcement-item p {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             line-height: 1.6;
             color: #bbb;
             font-family: sans-serif;
@@ -172,8 +185,8 @@
 </head>
 <body>
 
-    <header class="hero-banner">
-        <div class="hero-text">
+    <header>
+        <div class="header-text">
             <h1>Gabriel's Inventory Section</h1>
             <h3>Data Engineering // System Library</h3>
             <a href="submit.html" class="btn-initialize">Initialize Submission</a>
@@ -182,7 +195,7 @@
 
     <main class="grid-container">
 
-        <!-- LEFT COLUMN -->
+        <!-- OBJECTIVE & STATUS SECTION -->
         <section class="content-left">
             <div class="section-block">
                 <h2>Hello, Welcome to my main page of Gabriel's Library.</h2>
@@ -195,7 +208,7 @@
             </div>
         </section>
 
-        <!-- RIGHT COLUMN: ANNOUNCEMENTS -->
+        <!-- ANNOUNCEMENT SECTION (Boxed) -->
         <aside class="content-right-announcements">
             <h2>Announcements</h2>
 
@@ -203,8 +216,8 @@
                 <p>
                     <a href="java.html" class="announcement-link">Java Programming.</a>
                 </p>
-                <!-- Remember to upload your photo to GitHub and update this path -->
-                <img src="images/security_banner.jpg" alt="SECURITY UPDATE BANNER" class="announcement-img">
+                <!-- Update this path to your uploaded security banner photo -->
+                <img src="images/security_update_banner.jpg" alt="SECURITY UPDATE BANNER" class="announcement-img">
             </div>
 
             <div class="announcement-item">

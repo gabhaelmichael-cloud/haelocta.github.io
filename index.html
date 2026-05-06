@@ -1,29 +1,226 @@
-<!-- ANNOUNCEMENT SECTION (Boxed) -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Responsive viewport for mobile compatibility -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gabriel's Inventory Section | System Library</title>
+    
+    <!-- Load Cinematic Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* CSS RESET */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            /* Background with dark overlay for readability */
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)), 
+                              url('frieren-wallpaper-4k-made-by-me-3-v0-for3cbmfqjoc1.jpg'); 
+            
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-color: #000;
+            
+            color: #e0e0e0;
+            font-family: 'Cinzel', serif, system-ui;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* --- HEADER SECTION --- */
+        header {
+            width: 100%;
+            height: 50vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .header-text h1 {
+            font-size: 2.8rem;
+            text-transform: uppercase;
+            letter-spacing: 10px;
+            margin-bottom: 10px;
+            text-shadow: 0 0 25px rgba(255, 255, 255, 0.6);
+            color: #fff;
+        }
+
+        .header-text h3 {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            margin-bottom: 40px;
+            color: #aaa;
+        }
+
+        .btn-initialize {
+            display: inline-block;
+            padding: 15px 35px;
+            background: none;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            color: #fff;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            transition: all 0.4s ease;
+        }
+
+        .btn-initialize:hover {
+            background: #fff;
+            color: #000;
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.4);
+        }
+
+        /* --- MAIN CONTENT GRID --- */
+        .grid-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 40px;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 50px;
+            flex-grow: 1;
+        }
+
+        @media screen and (max-width: 900px) {
+            .grid-container {
+                grid-template-columns: 1fr;
+                padding: 40px 20px;
+            }
+        }
+
+        .content-left {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .section-block {
+            padding-left: 20px;
+            border-left: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .section-block h2 {
+            font-size: 1.4rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        .section-block p {
+            font-size: 0.9rem;
+            line-height: 1.9;
+            color: #ccc;
+            font-family: sans-serif;
+        }
+
+        /* --- ANNOUNCEMENTS COLUMN --- */
+        .content-right-announcements {
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 30px;
+            background-color: rgba(0, 0, 0, 0.25);
+            border-radius: 4px;
+            height: fit-content;
+        }
+
+        .content-right-announcements h2 {
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: 25px;
+            color: #fff;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            padding-bottom: 15px;
+        }
+
+        .announcement-item {
+            margin-bottom: 30px;
+        }
+
+        .announcement-link {
+            color: #fff;
+            text-decoration: underline;
+            letter-spacing: 1px;
+            font-size: 0.95rem;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .announcement-link:hover {
+            color: #87CEEB;
+        }
+
+        .announcement-item p {
+            font-size: 0.8rem;
+            line-height: 1.6;
+            color: #bbb;
+            font-family: sans-serif;
+            margin-top: 8px;
+        }
+
+        .announcement-img {
+            width: 100%;
+            height: auto;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-text">
+            <h1>Gabriel's Inventory Section</h1>
+            <h3>Data Engineering // System Library</h3>
+            <a href="submit.html" class="btn-initialize">Initialize Submission</a>
+        </div>
+    </header>
+
+    <main class="grid-container">
+
+        <!-- OBJECTIVE & STATUS SECTION -->
+        <section class="content-left">
+            <div class="section-block">
+                <h2>Hello, Welcome to my main page of Gabriel's Library.</h2>
+                <p>Welcome to the central hub. This library is designed for the secure transmission of data, feedback, and collaborations. Use the link above to submit your tasks for review. Stay tune as the page is still in development.</p>
+            </div>
+
+            <div class="section-block">
+                <h2>System Status</h2>
+                <p>All core systems operational. Tally Ingestion Terminal connection confirmed. Awaiting data packets.</p>
+            </div>
+        </section>
+
+        <!-- UPDATED MULTI-SECTION ANNOUNCEMENTS -->
         <aside class="content-right-announcements">
             <h2>Announcements</h2>
 
             <!-- 1. JAVA PROGRAMMING -->
             <div class="announcement-item">
-                <p>
-                    <a href="java.html" class="announcement-link">Java Programming.</a>
-                </p>
+                <p><a href="java.html" class="announcement-link">Java Programming.</a></p>
                 <img src="images/security_update_banner.jpg" alt="SECURITY UPDATE BANNER" class="announcement-img">
             </div>
 
             <!-- 2. HUMAN COMPUTER INTERACTION -->
             <div class="announcement-item">
-                <p>
-                    <a href="hci.html" class="announcement-link">Human Computer Interaction.</a>
-                </p>
-                <p>Analyzing system usability heuristics and user-centric design models.</p>
+                <p><a href="hci.html" class="announcement-link">Human Computer Interaction.</a></p>
+                <p>Focusing on usability heuristics, recognition vs. recall, and user-centric design principles.</p>
             </div>
 
             <!-- 3. INFORMATION SYSTEM ORGANIZATION -->
             <div class="announcement-item">
-                <p>
-                    <a href="iso.html" class="announcement-link">Information System Organization.</a>
-                </p>
-                <p>Exploring data flow modeling, ERDs, and organizational infrastructure.</p>
+                <p><a href="iso.html" class="announcement-link">Information System Organization.</a></p>
+                <p>Documentation on organizational data flow, system hierarchies, and infrastructure modeling.</p>
             </div>
 
             <!-- MAINTENANCE NOTICE -->
@@ -31,3 +228,8 @@
                 <p>Scheduled maintenance for the Data Hub will occur this Saturday. Expect minor latency.</p>
             </div>
         </aside>
+
+    </main>
+
+</body>
+</html>

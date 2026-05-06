@@ -36,7 +36,7 @@
             width: 100%;
             height: 50vh;
             display: flex;
-            justify-content: center;
+            justify(content): center;
             align-items: center;
             text-align: center;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
@@ -168,6 +168,15 @@
             margin-top: 8px;
         }
 
+        .deadline-tag {
+            color: #ff4d4d;
+            font-weight: bold;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            display: block;
+            margin-top: 5px;
+        }
+
         .announcement-img {
             width: 100%;
             height: auto;
@@ -201,26 +210,29 @@
             </div>
         </section>
 
-        <!-- UPDATED MULTI-SECTION ANNOUNCEMENTS -->
+        <!-- UPDATED ANNOUNCEMENTS WITH DEADLINES -->
         <aside class="content-right-announcements">
             <h2>Announcements</h2>
 
             <!-- 1. JAVA PROGRAMMING -->
             <div class="announcement-item">
                 <p><a href="java.html" class="announcement-link">Java Programming.</a></p>
+                <span class="deadline-tag">Project Deadline: 5th June 2026, 5:00 PM[cite: 2]</span>
                 <img src="images/security_update_banner.jpg" alt="SECURITY UPDATE BANNER" class="announcement-img">
             </div>
 
             <!-- 2. HUMAN COMPUTER INTERACTION -->
             <div class="announcement-item">
                 <p><a href="hci.html" class="announcement-link">Human Computer Interaction.</a></p>
-                <p>Focusing on usability heuristics, recognition vs. recall, and user-centric design principles.</p>
+                <span class="deadline-tag">Milestone 1-4 Submissions in Progress[cite: 2]</span>
+                <p>Developing safety-first EV Dashboard prototypes for Sarawak's environmental conditions[cite: 2].</p>
             </div>
 
             <!-- 3. INFORMATION SYSTEM ORGANIZATION -->
             <div class="announcement-item">
                 <p><a href="iso.html" class="announcement-link">Information System Organization.</a></p>
-                <p>Documentation on organizational data flow, system hierarchies, and infrastructure modeling.</p>
+                <span class="deadline-tag">Due: Friday, 5th June 2026, 4:00 PM[cite: 1]</span>
+                <p>Submitting Case Study analysis on future organizational application trends[cite: 1].</p>
             </div>
 
             <!-- MAINTENANCE NOTICE -->

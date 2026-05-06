@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HCI | System Documentation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.95)), 
+                              url('frieren-wallpaper-4k-made-by-me-3-v0-for3cbmfqjoc1.jpg'); 
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-color: #000;
+            color: #fff; 
+            font-family: 'Cinzel', serif, system-ui;
+            padding: 50px 20px;
+            line-height: 1.7;
+        }
+        .container { max-width: 1000px; margin: 0 auto; }
+        header { border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 25px; margin-bottom: 40px; }
+        h1 { font-size: 2.2rem; letter-spacing: 5px; }
+        h2 { color: #87CEEB; letter-spacing: 3px; text-transform: uppercase; margin-top: 50px; border-left: 4px solid #87CEEB; padding-left: 15px; font-size: 1.4rem; }
+        .back-link { color: #888; text-decoration: none; font-size: 0.8rem; letter-spacing: 2px; transition: 0.3s; }
+        .back-link:hover { color: #fff; }
+        .doc-section { background: rgba(255,255,255,0.03); padding: 30px; border-radius: 4px; margin-bottom: 30px; border: 1px solid rgba(255,255,255,0.05); }
+        .specs-list { list-style: none; padding: 0; }
+        .specs-list li { margin-bottom: 15px; padding-left: 20px; position: relative; font-family: sans-serif; color: #bbb; font-size: 0.9rem;}
+        .specs-list li::before { content: ">"; position: absolute; left: 0; color: #87CEEB; font-weight: bold;}
+        @media screen and (max-width: 768px) { h1 { font-size: 1.8rem; } .doc-section { padding: 20px; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="index.html" class="back-link">← RETURN TO SYSTEM HUB</a>
+            <h1>Human-Computer Interaction</h1>
+        </header>
+
+        <section class="doc-section">
+            <h2>Project: The EV Edit (Proton e.MAS Analysis)</h2>
+            <p style="font-family: sans-serif; color: #ccc; margin-bottom: 20px;">An expert evaluation of the Proton e.MAS website usability based on Nielsen's 10 Heuristics.</p>
+            
+            <ul class="specs-list">
+                <li><strong>Visibility of System Status:</strong> Assessing how the site communicates progress during the booking process.</li>
+                <li><strong>Recognition vs. Recall:</strong> Analyzing the navigation menu to reduce user cognitive load.</li>
+                <li><strong>User Control and Freedom:</strong> Reviewing "Emergency Exits" for users when making errors.</li>
+                <li><strong>Consistency and Standards:</strong> Ensuring design patterns match industry expectations.</li>
+            </ul>
+        </section>
+
+        <section class="doc-section">
+            <h2>Group Strategy Members</h2>
+            <ul class="specs-list">
+                <li>Gabriel Michael (Lead Strategist)</li>
+                <li>Aini</li>
+                <li>Azizi (Jiji)</li>
+                <li>Syafiqah (Sya)</li>
+            </ul>
+        </section>
+    </div>
+</body>
+</html>

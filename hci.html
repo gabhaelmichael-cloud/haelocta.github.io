@@ -3,21 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HCI | System Documentation</title>
+    <title>HCI | Smart EV Dashboard Project</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
             background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.95)), 
                               url('frieren-wallpaper-4k-made-by-me-3-v0-for3cbmfqjoc1.jpg'); 
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            background-color: #000;
-            color: #fff; 
-            font-family: 'Cinzel', serif, system-ui;
-            padding: 50px 20px;
-            line-height: 1.7;
+            background-size: cover; background-position: center; background-attachment: fixed;
+            background-color: #000; color: #fff; font-family: 'Cinzel', serif, system-ui;
+            padding: 50px 20px; line-height: 1.7;
         }
         .container { max-width: 1000px; margin: 0 auto; }
         header { border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 25px; margin-bottom: 40px; }
@@ -29,35 +24,40 @@
         .specs-list { list-style: none; padding: 0; }
         .specs-list li { margin-bottom: 15px; padding-left: 20px; position: relative; font-family: sans-serif; color: #bbb; font-size: 0.9rem;}
         .specs-list li::before { content: ">"; position: absolute; left: 0; color: #87CEEB; font-weight: bold;}
-        @media screen and (max-width: 768px) { h1 { font-size: 1.8rem; } .doc-section { padding: 20px; } }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
             <a href="index.html" class="back-link">← RETURN TO SYSTEM HUB</a>
-            <h1>Human-Computer Interaction</h1>
+            <h1>Smart EV Dashboard Prototype</h1>
         </header>
 
         <section class="doc-section">
-            <h2>Project: The EV Edit (Proton e.MAS Analysis)</h2>
-            <p style="font-family: sans-serif; color: #ccc; margin-bottom: 20px;">An expert evaluation of the Proton e.MAS website usability based on Nielsen's 10 Heuristics.</p>
-            
+            <h2>Project Scope & Context</h2>
+            <p style="font-family: sans-serif; color: #ccc; margin-bottom: 20px;">Designing a homegrown Electric Vehicle (EV) dashboard for the Sarawak Ministry of Transport (MOT)[cite: 2].</p>
             <ul class="specs-list">
-                <li><strong>Visibility of System Status:</strong> Assessing how the site communicates progress during the booking process.</li>
-                <li><strong>Recognition vs. Recall:</strong> Analyzing the navigation menu to reduce user cognitive load.</li>
-                <li><strong>User Control and Freedom:</strong> Reviewing "Emergency Exits" for users when making errors.</li>
-                <li><strong>Consistency and Standards:</strong> Ensuring design patterns match industry expectations.</li>
+                <li><strong>Sarawak Context:</strong> Tailored for intense sun glare, heavy rain, and Pan Borneo long-distance travel[cite: 2].</li>
+                <li><strong>Integrated Modules:</strong> Includes Energy & Charging, Climate Control, and Navigation & Range systems[cite: 2].</li>
+                <li><strong>Design Strategy:</strong> Critical response to touchscreen-only controls, prioritizing driver safety and glanceable interaction[cite: 2].</li>
             </ul>
         </section>
 
         <section class="doc-section">
-            <h2>Group Strategy Members</h2>
+            <h2>HCI Requirements & Theory</h2>
             <ul class="specs-list">
-                <li>Gabriel Michael (Lead Strategist)</li>
-                <li>Aini</li>
-                <li>Azizi (Jiji)</li>
-                <li>Syafiqah (Sya)</li>
+                <li><strong>Motor-Control:</strong> Precise application of Fitts' Law for touch target sizing[cite: 2].</li>
+                <li><strong>Cognitive Principles:</strong> Managing attention and reducing mental workload during travel[cite: 2].</li>
+                <li><strong>Glanceability:</strong> Ensuring information is distinguishable within 2-3 steps of interaction[cite: 2].</li>
+            </ul>
+        </section>
+
+        <section class="doc-section">
+            <h2>Team Milestones</h2>
+            <ul class="specs-list">
+                <li><strong>User Research:</strong> Affinity and Persona diagrams based on EV/hybrid user interviews[cite: 2].</li>
+                <li><strong>Architecture:</strong> Low-Fi wireframes and high-contrast Hi-Fi Figma prototypes[cite: 2].</li>
+                <li><strong>Validation:</strong> Think-aloud testing and System Usability Scale (SUS) reporting[cite: 2].</li>
             </ul>
         </section>
     </div>

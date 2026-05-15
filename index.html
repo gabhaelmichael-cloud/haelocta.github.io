@@ -101,13 +101,6 @@
             color: #fff;
         }
 
-        .section-block p {
-            font-size: 0.9rem;
-            line-height: 1.9;
-            color: #ccc;
-            font-family: sans-serif;
-        }
-
         /* --- FILE ARCHIVE STYLING --- */
         #file-list {
             margin-top: 20px;
@@ -126,21 +119,21 @@
         }
 
         .file-info { display: flex; flex-direction: column; gap: 5px; }
-        .file-name { font-weight: bold; color: #fff; font-size: 0.9rem; }
+        .file-name { font-weight: bold; color: #87CEEB; font-size: 0.9rem; letter-spacing: 1px; }
         .file-date { font-size: 0.7rem; color: #888; }
 
         .download-btn {
-            color: #87CEEB;
+            color: #fff;
             text-decoration: none;
             font-weight: bold;
             font-size: 0.75rem;
             text-transform: uppercase;
-            border: 1px solid #87CEEB;
+            border: 1px solid rgba(255,255,255,0.3);
             padding: 6px 12px;
             transition: 0.3s;
         }
 
-        .download-btn:hover { background: #87CEEB; color: #000; }
+        .download-btn:hover { background: #fff; color: #000; }
 
         .content-right-announcements {
             border: 1px solid rgba(255, 255, 255, 0.08);
@@ -206,12 +199,12 @@
         <section class="content-left">
             <div class="section-block">
                 <h2>System Objectives</h2>
-                <p>This hub serves as the central node for data ingestion and project documentation for UNIMAS Semester 2, 2025/2026.</p>
+                <p>Welcome to the central hub. This library is designed for the secure transmission of data, feedback, and collaborations. Use the link above to submit your tasks for review.</p>
             </div>
 
             <div class="section-block">
                 <h2>Public Submissions Archive</h2>
-                <p>Recently ingested data packets from the Tally terminal:</p>
+                <p>Recent data packets ingested by the system:</p>
                 <div id="file-list">
                     <p style="font-size: 0.8rem; color: #666;">Synchronizing with Google Cloud Database...</p>
                 </div>
@@ -242,41 +235,44 @@
     </main>
 
     <script>
-        // PASTE YOUR PUBLISHED GOOGLE SHEET CSV LINK HERE
         const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS3BqSRBSadnv6sf9otgXic_Hk-pZhdYVNHWMwbzGXrxBN7loANGSDkKzdtoNOlaG7NjMN-wGZuoExS/pub?gid=0&single=true&output=csv';
 
         async function fetchSubmissions() {
             try {
                 const response = await fetch(SHEET_CSV_URL);
                 const data = await response.text();
-                const rows = data.split('\n').slice(1); // Skip header row
+                const rows = data.split('\n').slice(1); 
                 const listContainer = document.getElementById('file-list');
                 
-                listContainer.innerHTML = ''; // Clear loading message
+                listContainer.innerHTML = ''; 
 
                 rows.forEach(row => {
                     const columns = row.split(',');
-                    // Assuming Column 1 is Submission Date and Column 2 is the File Link URL
-                    if (columns[1]) {
-                        const date = columns[0] || "Unknown Date";
-                        const fileUrl = columns[1].replace(/"/g, "").trim();
-                        const fileName = fileUrl.split('/').pop().split('?')[0] || "Uploaded_File";
+                    const rawUrl = columns[5] ? columns[5].replace(/"/g, "").trim() : null;
+                    const date = columns[2] ? columns[2].replace(/"/g, "").trim() : "Unknown Date";
 
+                    if (rawUrl && rawUrl.includes('http')) {
+                        // NEW EXTRACTION LOGIC:
+                        // This regex looks for 'private/' and captures everything until it hits a '?' or the end of the string.
+                        const regex = /private\/(.*?)(?:\?|$)/;
+                        const match = rawUrl.match(regex);
+                        let cleanFileName = match ? match[1] : "Uploaded_File";
+                        
                         const item = document.createElement('div');
                         item.className = 'file-item';
                         item.innerHTML = `
                             <div class="file-info">
-                                <span class="file-name">${fileName}</span>
-                                <span class="file-date">Ingested: ${date}</span>
+                                <span class="file-name">${cleanFileName}</span>
+                                <span class="file-date">Submitted: ${date}</span>
                             </div>
-                            <a href="${fileUrl}" target="_blank" class="download-btn">Download</a>
+                            <a href="${rawUrl}" target="_blank" class="download-btn">Download</a>
                         `;
                         listContainer.appendChild(item);
                     }
                 });
             } catch (error) {
-                console.error('Data synchronization failed:', error);
-                document.getElementById('file-list').innerHTML = '<p style="color:red; font-size:0.8rem;">ERROR: System Link Failure. Check Console.</p>';
+                console.error('Fetch Error:', error);
+                document.getElementById('file-list').innerHTML = '<p style="color:red; font-size:0.8rem;">ERROR: Connection to Database Failed.</p>';
             }
         }
 

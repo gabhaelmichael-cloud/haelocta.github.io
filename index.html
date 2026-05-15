@@ -241,9 +241,14 @@
             try {
                 const response = await fetch(SHEET_CSV_URL);
                 const data = await response.text();
-                const rows = data.split('\n').slice(1); 
-                const listContainer = document.getElementById('file-list');
                 
+                // Split by rows and skip headers
+                let rows = data.split('\n').slice(1); 
+                
+                // REVERSE ROWS: Latest to Oldest
+                rows.reverse();
+
+                const listContainer = document.getElementById('file-list');
                 listContainer.innerHTML = ''; 
 
                 rows.forEach(row => {
@@ -252,8 +257,7 @@
                     const date = columns[2] ? columns[2].replace(/"/g, "").trim() : "Unknown Date";
 
                     if (rawUrl && rawUrl.includes('http')) {
-                        // NEW EXTRACTION LOGIC:
-                        // This regex looks for 'private/' and captures everything until it hits a '?' or the end of the string.
+                        // Extraction logic for filename located after 'private/'
                         const regex = /private\/(.*?)(?:\?|$)/;
                         const match = rawUrl.match(regex);
                         let cleanFileName = match ? match[1] : "Uploaded_File";

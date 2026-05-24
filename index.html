@@ -101,6 +101,79 @@
             color: #fff;
         }
 
+        .section-block p {
+            font-size: 0.9rem;
+            line-height: 1.9;
+            color: #ccc;
+            font-family: sans-serif;
+        }
+
+        /* --- AUTHENTICATION SHIELD INTERFACE --- */
+        .auth-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 30px;
+            border-radius: 4px;
+            margin-top: 20px;
+            max-width: 500px;
+        }
+
+        .auth-form {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .auth-input {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 12px;
+            color: #fff;
+            font-family: sans-serif;
+            font-size: 0.95rem;
+            border-radius: 4px;
+            flex-grow: 1;
+            letter-spacing: 2px;
+        }
+
+        .auth-input:focus {
+            outline: none;
+            border-color: #87CEEB;
+        }
+
+        .auth-btn {
+            background: none;
+            border: 1px solid #87CEEB;
+            color: #87CEEB;
+            padding: 0 25px;
+            font-family: 'Cinzel', serif;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: 0.3s;
+            border-radius: 4px;
+        }
+
+        .auth-btn:hover {
+            background: #87CEEB;
+            color: #000;
+        }
+
+        .error-msg {
+            color: #ff4d4d;
+            font-family: sans-serif;
+            font-size: 0.8rem;
+            margin-top: 10px;
+            display: none;
+        }
+
+        /* --- SUBMISSIONS CONTAINER (HIDDEN DEFAULT) --- */
+        #protected-archive-content {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.6s ease-in-out;
+        }
+
         /* --- FILE ARCHIVE STYLING --- */
         #file-list {
             margin-top: 20px;
@@ -175,13 +248,6 @@
             display: block;
             margin-top: 5px;
         }
-
-        .announcement-img {
-            width: 100%;
-            height: auto;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            margin-top: 10px;
-        }
     </style>
 </head>
 <body>
@@ -202,11 +268,23 @@
                 <p>Welcome to the central hub. This library is designed for the secure transmission of data, feedback, and collaborations. Use the link above to submit your tasks for review.</p>
             </div>
 
-            <div class="section-block">
+            <div class="section-block" id="archive-section">
                 <h2>Public Submissions Archive</h2>
-                <p>Recent data packets ingested by the system:</p>
-                <div id="file-list">
-                    <p style="font-size: 0.8rem; color: #666;">Synchronizing with Google Cloud Database...</p>
+                
+                <div class="auth-card" id="auth-gate">
+                    <p style="font-family: sans-serif; font-size: 0.85rem; color: #aaa;">Identity Verification Required. Enter your Matric Number to decrypt system logs:</p>
+                    <div class="auth-form">
+                        <input type="text" id="matric-input" class="auth-input" placeholder="e.g., 106097" maxlength="10">
+                        <button type="button" onclick="verifyAccess()" class="auth-btn">Verify</button>
+                    </div>
+                    <div id="error-message" class="error-msg">ACCESS DENIED: Unauthorized Credentials.</div>
+                </div>
+
+                <div id="protected-archive-content">
+                    <p style="font-family: sans-serif; font-size: 0.9rem; margin-top: 15px;">Recent data packets ingested by the system:</p>
+                    <div id="file-list">
+                        <p style="font-size: 0.8rem; color: #666;">Synchronizing with Google Cloud Database...</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -218,7 +296,6 @@
                 <p><a href="java.html" class="announcement-link">Java Programming.</a></p>
                 <span class="deadline-tag">Assignment Deadline: 5th June 2026, 5:00 PM</span>
                 <span class="deadline-tag">Project Deadline: 5th June 2026, 5:00 PM</span>
-                <img src="images/security_update_banner.jpg" alt="SECURITY UPDATE BANNER" class="announcement-img">
             </div>
 
             <div class="announcement-item">
@@ -235,18 +312,46 @@
     </main>
 
     <script>
-        const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS3BqSRBSadnv6sf9otgXic_Hk-pZhdYVNHWMwbzGXrxBN7loANGSDkKzdtoNOlaG7NjMN-wGZuoExS/pub?gid=0&single=true&output=csv';
+        // Paste your published CSV link here
+        const SHEET_CSV_URL = 'YOUR_GOOGLE_SHEET_CSV_URL_HERE';
+        
+        // Whitelisted Matric Numbers
+        const ALLOWED_MATRICS = ["106097", "105962", "103744"];
+
+        function verifyAccess() {
+            const userInput = document.getElementById('matric-input').value.trim();
+            const errorDisplay = document.getElementById('error-message');
+            const authGate = document.getElementById('auth-gate');
+            const vaultContent = document.getElementById('protected-archive-content');
+
+            if (ALLOWED_MATRICS.includes(userInput)) {
+                errorDisplay.style.display = 'none';
+                authGate.style.display = 'none'; // Clear out login element
+                
+                // Expose archive wrapper and fade it in gracefully
+                vaultContent.style.display = 'block';
+                setTimeout(() => { vaultContent.style.opacity = '1'; }, 50);
+                
+                // Initialize database fetch operation
+                fetchSubmissions();
+            } else {
+                errorDisplay.style.display = 'block';
+                document.getElementById('matric-input').value = '';
+            }
+        }
+
+        // Keep input execution smooth via 'Enter' key press handling
+        document.getElementById('matric-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') { verifyAccess(); }
+        });
 
         async function fetchSubmissions() {
             try {
                 const response = await fetch(SHEET_CSV_URL);
                 const data = await response.text();
-                
-                // Split by rows and skip headers
                 let rows = data.split('\n').slice(1); 
                 
-                // REVERSE ROWS: Latest to Oldest
-                rows.reverse();
+                rows.reverse(); // Order from latest to oldest
 
                 const listContainer = document.getElementById('file-list');
                 listContainer.innerHTML = ''; 
@@ -257,7 +362,6 @@
                     const date = columns[2] ? columns[2].replace(/"/g, "").trim() : "Unknown Date";
 
                     if (rawUrl && rawUrl.includes('http')) {
-                        // Extraction logic for filename located after 'private/'
                         const regex = /private\/(.*?)(?:\?|$)/;
                         const match = rawUrl.match(regex);
                         let cleanFileName = match ? match[1] : "Uploaded_File";
@@ -279,8 +383,6 @@
                 document.getElementById('file-list').innerHTML = '<p style="color:red; font-size:0.8rem;">ERROR: Connection to Database Failed.</p>';
             }
         }
-
-        fetchSubmissions();
     </script>
 
 </body>

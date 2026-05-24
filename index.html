@@ -274,7 +274,7 @@
                 <div class="auth-card" id="auth-gate">
                     <p style="font-family: sans-serif; font-size: 0.85rem; color: #aaa;">Identity Verification Required. Enter your Matric Number to decrypt system logs:</p>
                     <div class="auth-form">
-                        <input type="text" id="matric-input" class="auth-input" placeholder="e.g., 106097" maxlength="10">
+                        <input type="text" id="matric-input" class="auth-input" placeholder="e.g., 111111" maxlength="10">
                         <button type="button" onclick="verifyAccess()" class="auth-btn">Verify</button>
                     </div>
                     <div id="error-message" class="error-msg">ACCESS DENIED: Unauthorized Credentials.</div>
@@ -313,7 +313,7 @@
 
     <script>
         // Paste your published CSV link here
-        const SHEET_CSV_URL = 'YOUR_GOOGLE_SHEET_CSV_URL_HERE';
+        const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS3BqSRBSadnv6sf9otgXic_Hk-pZhdYVNHWMwbzGXrxBN7loANGSDkKzdtoNOlaG7NjMN-wGZuoExS/pub?gid=0&single=true&output=csv';
         
         // Whitelisted Matric Numbers
         const ALLOWED_MATRICS = ["106097", "105962", "103744"];

@@ -77,12 +77,12 @@
             margin: 0 auto;
             padding: 60px 40px;
             display: grid;
-            grid-template-columns: 2fr 1fr;
+            grid-template-columns: 1.8fr 1.2fr; /* Slightly wider right column for the table matrix */
             gap: 50px;
             flex-grow: 1;
         }
 
-        @media screen and (max-width: 900px) {
+        @media screen and (max-width: 1024px) {
             .grid-container { grid-template-columns: 1fr; padding: 40px 20px; }
         }
 
@@ -108,7 +108,7 @@
             font-family: sans-serif;
         }
 
-        /* --- AUTHENTICATION SHIELD INTERFACE --- */
+        /* --- VERIFICATION GATE INTERFACE --- */
         .auth-card {
             background: rgba(255, 255, 255, 0.02);
             border: 1px solid rgba(255, 255, 255, 0.08);
@@ -136,10 +136,7 @@
             letter-spacing: 2px;
         }
 
-        .auth-input:focus {
-            outline: none;
-            border-color: #87CEEB;
-        }
+        .auth-input:focus { outline: none; border-color: #87CEEB; }
 
         .auth-btn {
             background: none;
@@ -154,32 +151,13 @@
             border-radius: 4px;
         }
 
-        .auth-btn:hover {
-            background: #87CEEB;
-            color: #000;
-        }
+        .auth-btn:hover { background: #87CEEB; color: #000; }
+        .error-msg { color: #ff4d4d; font-family: sans-serif; font-size: 0.8rem; margin-top: 10px; display: none; }
 
-        .error-msg {
-            color: #ff4d4d;
-            font-family: sans-serif;
-            font-size: 0.8rem;
-            margin-top: 10px;
-            display: none;
-        }
+        #protected-archive-content { display: none; opacity: 0; transition: opacity 0.6s ease-in-out; }
 
-        /* --- SUBMISSIONS CONTAINER (HIDDEN DEFAULT) --- */
-        #protected-archive-content {
-            display: none;
-            opacity: 0;
-            transition: opacity 0.6s ease-in-out;
-        }
-
-        /* --- FILE ARCHIVE STYLING --- */
-        #file-list {
-            margin-top: 20px;
-            font-family: sans-serif;
-        }
-
+        /* --- FILE ARCHIVE LOG --- */
+        #file-list { margin-top: 20px; font-family: sans-serif; }
         .file-item {
             background: rgba(255, 255, 255, 0.05);
             padding: 15px;
@@ -190,11 +168,9 @@
             align-items: center;
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
-
         .file-info { display: flex; flex-direction: column; gap: 5px; }
         .file-name { font-weight: bold; color: #87CEEB; font-size: 0.9rem; letter-spacing: 1px; }
         .file-date { font-size: 0.7rem; color: #888; }
-
         .download-btn {
             color: #fff;
             text-decoration: none;
@@ -205,18 +181,18 @@
             padding: 6px 12px;
             transition: 0.3s;
         }
-
         .download-btn:hover { background: #fff; color: #000; }
 
-        .content-right-announcements {
+        /* --- TRACKER TABLE LAYOUT STYLE --- */
+        .tracker-container {
             border: 1px solid rgba(255, 255, 255, 0.08);
-            padding: 30px;
             background-color: rgba(0, 0, 0, 0.25);
             border-radius: 4px;
+            padding: 25px;
             height: fit-content;
         }
 
-        .content-right-announcements h2 {
+        .tracker-container h2 {
             font-size: 1.2rem;
             text-transform: uppercase;
             letter-spacing: 4px;
@@ -227,26 +203,51 @@
             padding-bottom: 15px;
         }
 
-        .announcement-item { margin-bottom: 30px; }
+        .tracker-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: sans-serif;
+            text-align: left;
+        }
 
-        .announcement-link {
+        .tracker-table th {
+            background-color: rgba(255, 255, 255, 0.05);
             color: #fff;
-            text-decoration: underline;
-            letter-spacing: 1px;
-            font-size: 0.95rem;
+            font-family: 'Cinzel', serif;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .tracker-table td {
+            padding: 14px 12px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 0.85rem;
+            vertical-align: middle;
+        }
+
+        .tracker-table tr:hover {
+            background-color: rgba(255, 255, 255, 0.02);
+        }
+
+        .tracker-link {
+            color: #fff;
+            text-decoration: none;
             font-weight: bold;
             transition: 0.3s;
         }
 
-        .announcement-link:hover { color: #87CEEB; }
+        .tracker-link:hover {
+            color: #87CEEB;
+            text-decoration: underline;
+        }
 
-        .deadline-tag {
+        .tracker-date {
             color: #ff4d4d;
-            font-weight: bold;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            display: block;
-            margin-top: 5px;
+            font-weight: 600;
+            font-size: 0.8rem;
         }
     </style>
 </head>
@@ -274,7 +275,7 @@
                 <div class="auth-card" id="auth-gate">
                     <p style="font-family: sans-serif; font-size: 0.85rem; color: #aaa;">Identity Verification Required. Enter your Matric Number to decrypt system logs:</p>
                     <div class="auth-form">
-                        <input type="text" id="matric-input" class="auth-input" placeholder="e.g., 111111" maxlength="10">
+                        <input type="text" id="matric-input" class="auth-input" placeholder="e.g., 106097" maxlength="10">
                         <button type="button" onclick="verifyAccess()" class="auth-btn">Verify</button>
                     </div>
                     <div id="error-message" class="error-msg">ACCESS DENIED: Unauthorized Credentials.</div>
@@ -289,33 +290,48 @@
             </div>
         </section>
 
-        <aside class="content-right-announcements">
-            <h2>Announcements</h2>
-
-            <div class="announcement-item">
-                <p><a href="java.html" class="announcement-link">Java Programming.</a></p>
-                <span class="deadline-tag">Assignment Deadline: 5th June 2026, 5:00 PM</span>
-                <span class="deadline-tag">Project Deadline: 5th June 2026, 5:00 PM</span>
-            </div>
-
-            <div class="announcement-item">
-                <p><a href="hci.html" class="announcement-link">Human Computer Interaction.</a></p>
-                <span class="deadline-tag">Milestone 1-4 Submissions in Progress</span>
-            </div>
-
-            <div class="announcement-item">
-                <p><a href="iso.html" class="announcement-link">Information System Organization.</a></p>
-                <span class="deadline-tag">Project Due: Friday, 5th June 2026, 4:00 PM</span>
-            </div>
+        <aside class="tracker-container">
+            <h2>Assignment Tracker</h2>
+            <table class="tracker-table">
+                <thead>
+                    <tr>
+                        <th>Assignment</th>
+                        <th>Due Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <a href="java.html" class="tracker-link">Java Programming (Assignment)</a>
+                        </td>
+                        <td class="tracker-date">05 Jun 2026, 5:00 PM</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="java.html" class="tracker-link">Java Programming (Project)</a>
+                        </td>
+                        <td class="tracker-date">05 Jun 2026, 5:00 PM</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="hci.html" class="tracker-link">Human Computer Interaction</a>
+                        </td>
+                        <td class="tracker-date" style="color: #87CEEB;">Milestones Ongoing</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="iso.html" class="tracker-link">Information System Organization</a>
+                        </td>
+                        <td class="tracker-date">05 Jun 2026, 4:00 PM</td>
+                    </tr>
+                </tbody>
+            </table>
         </aside>
 
     </main>
 
     <script>
-        // Paste your published CSV link here
         const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS3BqSRBSadnv6sf9otgXic_Hk-pZhdYVNHWMwbzGXrxBN7loANGSDkKzdtoNOlaG7NjMN-wGZuoExS/pub?gid=0&single=true&output=csv';
-        
-        // Whitelisted Matric Numbers
         const ALLOWED_MATRICS = ["106097", "105962", "103744"];
 
         function verifyAccess() {
@@ -326,13 +342,9 @@
 
             if (ALLOWED_MATRICS.includes(userInput)) {
                 errorDisplay.style.display = 'none';
-                authGate.style.display = 'none'; // Clear out login element
-                
-                // Expose archive wrapper and fade it in gracefully
+                authGate.style.display = 'none';
                 vaultContent.style.display = 'block';
                 setTimeout(() => { vaultContent.style.opacity = '1'; }, 50);
-                
-                // Initialize database fetch operation
                 fetchSubmissions();
             } else {
                 errorDisplay.style.display = 'block';
@@ -340,7 +352,6 @@
             }
         }
 
-        // Keep input execution smooth via 'Enter' key press handling
         document.getElementById('matric-input').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') { verifyAccess(); }
         });
@@ -350,8 +361,7 @@
                 const response = await fetch(SHEET_CSV_URL);
                 const data = await response.text();
                 let rows = data.split('\n').slice(1); 
-                
-                rows.reverse(); // Order from latest to oldest
+                rows.reverse();
 
                 const listContainer = document.getElementById('file-list');
                 listContainer.innerHTML = ''; 
